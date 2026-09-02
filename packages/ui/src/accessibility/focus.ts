@@ -1,0 +1,3 @@
+export function nextIndex(current:number,length:number,direction=1){if(length<=0)return-1;return((current+direction)%length+length)%length}
+export function rovingTabIndex(active:boolean){return active?0:-1}
+export function announce(message:string,root:HTMLElement=document.body){let node=root.querySelector<HTMLElement>('[data-artinos-live]');if(!node){node=document.createElement('div');node.dataset.artinosLive='true';node.setAttribute('aria-live','polite');node.setAttribute('aria-atomic','true');Object.assign(node.style,{position:'fixed',width:'1px',height:'1px',overflow:'hidden',clipPath:'inset(50%)'});root.append(node)}node.textContent='';requestAnimationFrame(()=>{if(node)node.textContent=message})}

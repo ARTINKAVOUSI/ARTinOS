@@ -1,0 +1,17 @@
+node_modules/
+.cache/
+*.tsbuildinfo
+coverage/
+packages/*/dist/
+.vite/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+*.tgz
+dist/
+*.zip
+dist/*.tgz
+apps/studio/dist/

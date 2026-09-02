@@ -1,0 +1,57 @@
+name: ARTINOS Auto PR
+
+on:
+  push:
+    branches:
+      - 'work/**'
+      - 'feature/**'
+      - 'fix/**'
+      - 'refine/**'
+      - 'agent/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: auto-pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  create-or-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create or refresh pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="main"
+          TITLE="ARTINOS: ${BRANCH//[-_\/]/ }"
+          EXISTING="$(gh pr list --repo "$REPO" --head "$BRANCH" --base "$BASE" --state open --json number --jq '.[0].number // empty')"
+          {
+            echo "## Automated ARTINOS work branch"
+            echo
+            echo "Branch: \`$BRANCH\`"
+            echo
+            echo "### Recent commits"
+            git log "origin/$BASE..HEAD" --pretty='- %s (%h)' -n 20 || true
+            echo
+            echo "### Required gates"
+            echo "- MetaBlock remains the only spatial primitive"
+            echo "- Panel / Dock / Viewport remain MetaBlock roles"
+            echo "- UI is composed from @artinos/ui"
+            echo "- Studio must not replace package behavior with local rectangles or interaction code"
+            echo "- CI must pass before merge"
+          } > /tmp/artinos-pr.md
+          if [ -z "$EXISTING" ]; then
+            gh pr create --repo "$REPO" --base "$BASE" --head "$BRANCH" --title "$TITLE" --body-file /tmp/artinos-pr.md
+          else
+            gh pr edit "$EXISTING" --repo "$REPO" --title "$TITLE" --body-file /tmp/artinos-pr.md
+          fi

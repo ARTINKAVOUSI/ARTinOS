@@ -1,0 +1,151 @@
+html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#070809;color:var(--au-text);font-family:var(--au-font);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}
+.studio{position:relative;width:100%;height:100%;overflow:hidden;background:var(--au-bg);isolation:isolate;--stage-exposure:1;--studio-edge:.08;--studio-label-size:10px;--studio-value-size:9.5px;--studio-tracking:.08em;--dock-group-gap:7px;--dock-group-inset:8px}
+.studio-workspace{position:absolute;inset:0}
+
+/* Application content only. All workspace surfaces/chrome come from @artinos/metablock and @artinos/ui. */
+.studio-stage{position:relative;width:100%;height:100%;overflow:hidden;background:#111}.studio-stage-image{position:absolute;inset:-2%;background:url('../assets/stage.jpg') center/cover no-repeat;filter:saturate(.96) contrast(.985) brightness(var(--stage-exposure));transform:scale(1.02);transition:filter 260ms ease,transform 900ms cubic-bezier(.16,1,.3,1)}.studio-stage-optics{position:absolute;inset:0;pointer-events:none;background:radial-gradient(52% 50% at 50% 43%,transparent 52%,rgba(4,5,5,.09) 92%),linear-gradient(180deg,rgba(5,6,6,.035),transparent 30%,rgba(4,5,5,.08));mix-blend-mode:multiply}.studio-stage .au-brand-mark{position:absolute;left:34px;top:26px;z-index:5}.stage-meta{position:absolute;right:34px;top:28px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.32);font:500 6.5px/1 var(--au-mono);letter-spacing:.14em}.stage-meta b{color:rgba(255,255,255,.54);font-weight:600}
+
+/* Panel content composition. MetaBlock supplies every panel/group surface. */
+.studio-nested-host{position:relative;width:100%;height:100%;min-height:0}.instrument-content{box-sizing:border-box;height:100%;padding:0 var(--dock-group-inset) 2px;overflow:auto;scrollbar-width:thin}.instrument-content .au-metacomp{margin-bottom:4px}.instrument-content .au-metacomp:last-child{margin-bottom:0}
+.quick-content{box-sizing:border-box;width:100%;height:100%;padding:10px 11px 9px;overflow:auto}.quick-content .au-metacomp{height:auto;min-height:0;margin:0 0 8px;display:block;overflow:visible;background:transparent;box-shadow:none;border-radius:0}.quick-content .au-metacomp:hover{filter:none}.quick-content .au-label{display:block;width:auto;max-width:none;padding:0 4px 5px;color:var(--au-muted);font:600 6.5px/1 var(--au-mono);letter-spacing:.14em}.quick-content .au-segment-surface{width:100%;height:25px}.quick-content>.au-button{width:100%;height:26px;margin-top:2px}
+
+.editor-panel-content{box-sizing:border-box;width:100%;height:100%;padding:7px 7px 9px;overflow:auto;scrollbar-width:thin}.editor-panel-content .au-inspector{padding:0}.editor-note{margin:8px 5px 2px;color:var(--au-faint);font:500 7px/1.6 var(--au-mono);letter-spacing:.03em}
+.schema-workbench{margin:9px 3px 2px;padding:9px;border-radius:9px;background:rgba(0,0,0,.11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}.schema-workbench-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}.schema-workbench-header b{font:650 6.5px/1 var(--au-mono);letter-spacing:.13em;color:var(--au-muted)}.schema-workbench-header span{font:500 6px/1 var(--au-mono);color:var(--au-faint)}.schema-workbench-actions{display:flex;align-items:center;gap:7px;margin-top:7px}.schema-workbench-actions .au-status-line{flex:1;padding:0}
+
+.system-footer-line{border-top:1px solid color-mix(in srgb,var(--au-line) 58%,transparent)}
+
+.toast{position:absolute;left:50%;top:18px;z-index:2000;transform:translate(-50%,-8px);height:25px;padding:0 10px;border-radius:7px;background:rgba(9,11,11,.78);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07),0 14px 36px -20px #000;backdrop-filter:blur(18px);display:flex;align-items:center;color:var(--au-muted);font:650 6.5px/1 var(--au-mono);letter-spacing:.13em;opacity:0;pointer-events:none;transition:opacity 130ms ease,transform 170ms cubic-bezier(.16,1,.3,1)}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Studio only maps system parameters to package tokens; it does not redraw package components. */
+.studio[data-contrast="soft"]{--au-text:#d3d8d6;--au-muted:#89918f}.studio[data-contrast="high"]{--au-text:#fff;--au-muted:#c3cbc8}.studio.high-contrast{--au-line:rgba(255,255,255,.18)}.studio.large-targets{--au-hit-expand:7px}.studio.reduced-motion *{transition-duration:.001ms!important;animation-duration:.001ms!important}
+@media(prefers-reduced-motion:reduce){.studio *{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+@media(max-width:900px){.stage-meta{display:none}}
+
+/* package-driven composition polish */
+.section-drag-hint{font:600 5.5px/1 var(--au-mono);letter-spacing:.16em;color:var(--au-faint);opacity:.5}.footer-help{margin-left:auto;color:var(--au-faint);opacity:.62}.quick-tip{margin:9px 3px 0;color:var(--au-faint);font:500 6px/1.55 var(--au-font)}
+.studio[data-chrome="quiet"] .mb-group-chrome{border-color:color-mix(in srgb,var(--au-line) 44%,transparent)!important}.studio[data-chrome="defined"] .mb-group-chrome{background:color-mix(in srgb,var(--au-surface-2) 24%,transparent);border-color:var(--au-line)!important}.studio[data-proximity="false"] .au-metacomp[data-proximity="true"]::before{opacity:0!important}.studio[data-proximity="false"] .au-metacomp[data-proximity="true"]{filter:none!important}.studio[data-motion="quiet"]{--mb-motion:120ms cubic-bezier(.2,.7,.2,1)}.studio[data-motion="expressive"]{--mb-motion:320ms cubic-bezier(.16,1,.3,1)}.studio[data-focus="clear"] .au-metacomp:has(:focus-visible){box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--au-signal) 68%,var(--au-line)),0 0 0 2px color-mix(in srgb,var(--au-signal) 13%,transparent)}.studio[data-focus="strong"] .au-metacomp:has(:focus-visible){box-shadow:inset 0 0 0 1px var(--au-signal),0 0 0 3px color-mix(in srgb,var(--au-signal) 18%,transparent)}
+.instrument-content{padding-top:4px;padding-bottom:4px}.instrument-content .au-control-host{margin-bottom:5px}.instrument-content .au-control-host:last-child{margin-bottom:0}.mb-group[data-role="instrument-section"]>.mb-group-chrome{padding-inline:2px}.mb-group[data-role="command-surface"]{margin:0}.mb-group[data-role="command-surface"]>.mb-group-body{padding:0}.mb-group[data-role="quick-controls"]>.mb-group-body{padding:0}
+@media(max-width:760px){.footer-help{display:none}.section-drag-hint{display:none}}
+
+/* Reference-aligned dock parent: horizontal command surface at the bottom, vertical rail at the sides. */
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]{min-height:238px}
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-renderer-resize[data-resize-edge="n"]{left:50%;right:auto;top:-7px;bottom:auto;width:72px;height:14px;transform:translateX(-50%);cursor:ns-resize}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome,.studio[data-dock-position="left"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome{position:absolute;top:0;bottom:0;z-index:4;width:54px;height:auto;border-bottom:0}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome{right:0;border-left:1px solid color-mix(in srgb,var(--au-line) 74%,transparent)}
+.studio[data-dock-position="left"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome{left:0;border-right:1px solid color-mix(in srgb,var(--au-line) 74%,transparent)}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body,.studio[data-dock-position="right"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{margin-right:54px}
+.studio[data-dock-position="left"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body,.studio[data-dock-position="left"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{margin-left:54px}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-group-chrome .au-chrome-bar,.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-group-chrome .au-chrome-bar{height:100%;padding:8px 5px;flex-direction:column;align-items:stretch}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-group-chrome .au-tab-bar,.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-group-chrome .au-tab-bar{height:auto;flex:1;flex-direction:column;align-items:stretch;gap:3px}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-group-chrome .au-tab,.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-group-chrome .au-tab{width:44px;height:auto;min-height:72px;padding:8px 5px;writing-mode:vertical-rl;text-orientation:mixed}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-group-chrome .au-search-box,.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-group-chrome .au-search-box,.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-group-chrome .au-telemetry,.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-group-chrome .au-telemetry{display:none}
+.studio[data-dock-position="right"] .mb-group[data-role="dock"]>.mb-renderer-resize{left:-7px;right:auto;top:50%;bottom:auto;width:14px;height:72px;transform:translateY(-50%);cursor:ew-resize}
+.studio[data-dock-position="left"] .mb-group[data-role="dock"]>.mb-renderer-resize{right:-7px;left:auto;top:50%;bottom:auto;width:14px;height:72px;transform:translateY(-50%);cursor:ew-resize}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome::before{content:"";flex:0 0 auto;width:18px;height:3px;border-radius:2px;background:color-mix(in srgb,var(--au-muted) 34%,transparent);opacity:.55}
+
+/* Optical panel material: layered frost, restrained edge light, and consistent breathing room. */
+.mb-group[data-role="dock"][data-variant="command-surface"],.mb-group[data-role="panel"],.mb-group[data-role="group"][data-variant="instrument-section"],.mb-group[data-role="tool"][data-variant="quick-controls"]{
+  background:
+    linear-gradient(145deg,color-mix(in srgb,#fff 5%,transparent),transparent 34%,color-mix(in srgb,#000 7%,transparent)),
+    radial-gradient(120% 90% at 12% 0%,color-mix(in srgb,var(--au-signal) 3.5%,transparent),transparent 52%),
+    color-mix(in srgb,var(--au-surface) 66%,transparent);
+  -webkit-backdrop-filter:blur(28px) saturate(118%) contrast(102%);
+  backdrop-filter:blur(28px) saturate(118%) contrast(102%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,#fff 8%,transparent),
+    inset 0 0 0 1px color-mix(in srgb,var(--au-line) 92%,transparent),
+    inset 0 -18px 34px color-mix(in srgb,#000 6%,transparent),
+    0 28px 72px -36px color-mix(in srgb,#000 88%,transparent);
+}
+.mb-group[data-role="dock"][data-variant="command-surface"]::before,.mb-group[data-role="panel"]::before,.mb-group[data-role="group"][data-variant="instrument-section"]::before,.mb-group[data-role="tool"][data-variant="quick-controls"]::before{content:"";position:absolute;inset:1px;z-index:0;border-radius:calc(var(--mb-radius) - 1px);pointer-events:none;background:linear-gradient(118deg,color-mix(in srgb,#fff 3.5%,transparent),transparent 28%,transparent 72%,color-mix(in srgb,var(--au-signal) 2%,transparent));opacity:.9}
+.mb-group[data-role="dock"][data-variant="command-surface"]>* ,.mb-group[data-role="panel"]>* ,.mb-group[data-role="group"][data-variant="instrument-section"]>* ,.mb-group[data-role="tool"][data-variant="quick-controls"]>*{position:relative;z-index:1}
+.mb-group[data-focused="true"]:not([data-fullscreen-locked="true"]){box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 10%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--mb-signal) 18%,var(--au-line)),0 30px 78px -36px color-mix(in srgb,#000 92%,transparent)}
+
+/* Spacing hierarchy: dock shell → panel section → instrument rows. */
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body{padding:9px 10px 8px}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome{padding-inline:4px}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{margin:0 10px 8px;border-radius:7px;overflow:hidden}
+.studio-nested-host>.mb-workspace-root{padding:0}
+.mb-group[data-role="group"][data-variant="instrument-section"]{margin:0;overflow:hidden}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-chrome{padding:3px 9px 0}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-body{padding:2px 4px 5px}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-footer{margin:0 8px 7px;border-radius:6px;overflow:hidden}
+.instrument-content{padding:7px 8px 8px}
+.instrument-content .au-control-host{margin-bottom:7px}
+.instrument-content .au-control-host:last-child{margin-bottom:0}
+.quick-content{padding:13px 13px 11px}
+.detached-panel-chrome{padding-inline:11px!important}
+
+@media(max-width:760px){.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body{padding:6px}.instrument-content{padding:6px}.quick-content{padding:10px}}
+
+/* Refined optical balance: nested panels blend into the parent instead of reading as black cards. */
+.mb-group[data-role="dock"][data-variant="command-surface"]{background:linear-gradient(145deg,color-mix(in srgb,#fff 4.5%,transparent),transparent 38%),radial-gradient(110% 120% at 15% 0%,color-mix(in srgb,var(--au-signal) 3%,transparent),transparent 58%),color-mix(in srgb,var(--au-surface) 48%,transparent);-webkit-backdrop-filter:blur(34px) saturate(124%);backdrop-filter:blur(34px) saturate(124%)}
+.mb-group[data-role="group"][data-variant="instrument-section"]{background:linear-gradient(155deg,color-mix(in srgb,#fff 4%,transparent),transparent 42%),color-mix(in srgb,var(--au-surface-2) 34%,transparent);-webkit-backdrop-filter:blur(20px) saturate(112%);backdrop-filter:blur(20px) saturate(112%);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 6%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--au-line) 62%,transparent),0 14px 34px -28px color-mix(in srgb,#000 70%,transparent)}
+.mb-group[data-role="group"][data-variant="instrument-section"]::before{background:linear-gradient(130deg,color-mix(in srgb,#fff 2.5%,transparent),transparent 48%,color-mix(in srgb,var(--au-signal) 1.5%,transparent))}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-chrome{height:28px;padding:1px 10px 0;border-bottom:1px solid color-mix(in srgb,var(--au-line) 42%,transparent)}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-body{padding:0}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-footer{margin:0 7px 6px;background:color-mix(in srgb,var(--au-surface-2) 18%,transparent)}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body{padding:8px}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{margin:0 8px 7px;background:color-mix(in srgb,var(--au-surface-2) 20%,transparent)}
+.instrument-content{padding:5px 7px 6px}
+.instrument-content .au-control-host{margin-bottom:5px}
+.instrument-content .au-metacomp{background:linear-gradient(90deg,color-mix(in srgb,#fff 2.5%,transparent),transparent 44%),color-mix(in srgb,var(--au-well) 54%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--au-line) 55%,transparent)}
+.instrument-content .au-metacomp:hover{background:linear-gradient(90deg,color-mix(in srgb,#fff 4%,transparent),transparent 48%),color-mix(in srgb,var(--au-well) 62%,transparent)}
+.system-footer-line{min-height:25px;padding-inline:9px;color:color-mix(in srgb,var(--au-muted) 88%,transparent)}
+.footer-help{max-width:54%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* v0.7 canonical MetaBlock composition polish */
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-chrome{padding-inline:3px}
+.mb-group[data-role="dock"][data-variant="command-surface"]{margin:0}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body,.mb-group[data-role="tool"][data-variant="quick-controls"]>.mb-group-body{padding:0}
+.instrument-content{padding:6px clamp(8px,var(--dock-group-inset),15px) 7px}.instrument-content .au-control-host{margin-bottom:6px}.instrument-content .au-control-host:last-child{margin-bottom:0}
+.instrument-content .au-metacomp{min-width:0}
+.mb-group[data-role="dock"][data-variant="command-surface"] .au-chrome-bar{padding-inline:12px;gap:10px}
+.mb-group[data-role="dock"][data-variant="command-surface"] .au-search-box{min-width:190px}
+.mb-group[data-role="dock"][data-variant="command-surface"] .au-telemetry{margin-left:2px}
+.section-drag-hint{transition:opacity 120ms ease,color 120ms ease}.mb-group[data-role="group"][data-variant="instrument-section"]:hover .section-drag-hint{opacity:.82;color:color-mix(in srgb,var(--au-signal) 42%,var(--au-muted))}
+.quick-content{padding:12px 12px 11px}.quick-content .au-control-host{margin-bottom:8px}.quick-tip{margin-top:10px;line-height:1.65}
+
+/* v0.12 detached MetaBlock chrome: a detached/docked panel remains compact and draggable. */
+.detached-panel-chrome{padding-inline:8px!important;gap:8px!important}.detached-panel-chrome .au-tab-bar{min-width:0}.detached-panel-chrome .au-tab{max-width:170px}.panel-posture{flex:0 0 auto;color:var(--au-faint);font:600 6px/1 var(--au-mono);letter-spacing:.14em;white-space:nowrap;opacity:.66}
+.mb-group[data-role="panel"]>.mb-group-body{min-height:0}.mb-group[data-role="panel"][data-posture="floating"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--au-line) 88%,transparent),0 30px 90px -42px rgba(0,0,0,.92)}
+
+/* Neutral optical glass and a single proportional spacing rhythm. */
+.studio{--studio-glass-shell:rgba(13,15,15,.01);--studio-glass-panel:rgba(17,19,19,.01);--studio-glass-control:rgba(7,9,9,.10);--studio-glass-edge:rgba(255,255,255,.035);--studio-glass-shadow:rgba(0,0,0,.34);--dock-space:clamp(10px,.72vw,14px);--panel-space:clamp(8px,.58vw,11px)}
+.mb-group[data-role="dock"][data-variant="command-surface"]{background:linear-gradient(180deg,var(--studio-glass-edge),transparent 23%),var(--studio-glass-shell);-webkit-backdrop-filter:blur(32px) saturate(100%) brightness(99%);backdrop-filter:blur(32px) saturate(100%) brightness(99%);box-shadow:inset 0 1px 0 var(--studio-glass-edge),inset 0 0 0 1px color-mix(in srgb,var(--au-line) 74%,transparent),0 28px 68px -38px var(--studio-glass-shadow)}
+.mb-group[data-role="group"][data-variant="instrument-section"],.mb-group[data-role="panel"],.mb-group[data-role="tool"][data-variant="quick-controls"]{background:linear-gradient(180deg,var(--studio-glass-edge),transparent 25%),var(--studio-glass-panel);-webkit-backdrop-filter:blur(22px) saturate(100%);backdrop-filter:blur(22px) saturate(100%);box-shadow:inset 0 1px 0 var(--studio-glass-edge),inset 0 0 0 1px color-mix(in srgb,var(--au-line) 58%,transparent),0 16px 36px -30px var(--studio-glass-shadow)}
+.mb-group[data-role="dock"][data-variant="command-surface"]::before,.mb-group[data-role="group"][data-variant="instrument-section"]::before,.mb-group[data-role="panel"]::before,.mb-group[data-role="tool"][data-variant="quick-controls"]::before{background:linear-gradient(120deg,rgba(255,255,255,.025),transparent 34%,transparent);opacity:1}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body{padding:var(--dock-space)}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{margin:0 var(--dock-space) var(--dock-space);background:rgba(8,10,10,.09)}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-chrome{height:30px;padding:2px var(--panel-space) 0;border-bottom:1px solid color-mix(in srgb,var(--au-line) 38%,transparent)}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-footer{margin:0 var(--panel-space) var(--panel-space);background:rgba(8,10,10,.08)}
+.instrument-content{padding:var(--panel-space)}
+.instrument-content .au-control-host{margin-bottom:calc(var(--panel-space) * .72)}
+.instrument-content .au-metacomp,.instrument-content .au-metacomp:hover{background:linear-gradient(90deg,rgba(255,255,255,.022),transparent 46%),var(--studio-glass-control);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--au-line) 46%,transparent)}
+
+/* Reference geometry: compact edge inset, asymmetric working columns, continuous footer. */
+.studio{--dock-space:6px;--panel-space:8px}
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]{min-height:0}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-chrome{height:42px;padding-inline:6px}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-body{padding:6px}
+.mb-group[data-role="dock"][data-variant="command-surface"]>.mb-group-footer{display:none}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-chrome{height:27px;padding:1px 8px 0}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-group-footer{height:25px;margin:0 8px 6px}
+.instrument-content{padding:2px 8px}
+.instrument-content .au-control-host{margin-bottom:2px}
+.system-footer-line{height:20px;min-height:20px;padding-inline:7px}
+.system-footer-line .footer-help{margin-left:auto;text-align:right}
+
+/* Quiet optical rails: visible when useful, otherwise absorbed into the glass. */
+.instrument-content,.quick-content,.editor-panel-content{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+.instrument-content::-webkit-scrollbar,.quick-content::-webkit-scrollbar,.editor-panel-content::-webkit-scrollbar{width:5px;height:5px}
+.instrument-content::-webkit-scrollbar-track,.quick-content::-webkit-scrollbar-track,.editor-panel-content::-webkit-scrollbar-track{background:transparent}
+.instrument-content::-webkit-scrollbar-thumb,.quick-content::-webkit-scrollbar-thumb,.editor-panel-content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border:1px solid transparent;border-radius:999px;background-clip:padding-box}
+.instrument-content::-webkit-scrollbar-thumb:hover,.quick-content::-webkit-scrollbar-thumb:hover,.editor-panel-content::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.22);background-clip:padding-box}
+
+/* Resize affordances remain subtle but discoverable on the dock and its child panels. */
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-renderer-resize[data-resize-edge="n"]{opacity:.34}
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-renderer-resize[data-resize-edge="n"]::after{left:50%;right:auto;top:6px;bottom:auto;width:42px;height:2px;border:0;border-radius:2px;background:rgba(255,255,255,.24);transform:translateX(-50%)}
+.studio[data-dock-position="bottom"] .mb-group[data-role="dock"][data-variant="command-surface"]>.mb-renderer-resize:hover{opacity:.8}
+.mb-group[data-role="group"][data-variant="instrument-section"]>.mb-renderer-resize{display:none}

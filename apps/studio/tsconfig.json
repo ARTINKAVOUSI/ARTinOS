@@ -1,0 +1,37 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@artinos/ui": [
+        "../../packages/ui/src/index.ts"
+      ],
+      "@artinos/ui/*": [
+        "../../packages/ui/src/*"
+      ],
+      "@artinos/metablock": [
+        "../../packages/metablock/src/index.ts"
+      ],
+      "@artinos/metablock/*": [
+        "../../packages/metablock/src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../shared/**/*.ts",
+    "../../types/react-shim.d.ts",
+    "../../types/assets.d.ts"
+  ],
+  "references": [
+    {
+      "path": "../../packages/ui"
+    },
+    {
+      "path": "../../packages/metablock"
+    }
+  ]
+}

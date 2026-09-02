@@ -1,0 +1,31 @@
+{
+  "name": "artinos-system-studio",
+  "private": true,
+  "version": "0.12.0",
+  "type": "module",
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "typecheck": "tsc -b --pretty false",
+    "build:types": "tsc -b --pretty false && node scripts/copy-assets.mjs",
+    "build:studio": "vite build --config apps/studio/vite.config.ts",
+    "build": "npm run typecheck && npm run build:studio",
+    "dev": "npm run build:types && vite --config apps/studio/vite.config.ts",
+    "test": "node scripts/test-core.mjs",
+    "verify": "node scripts/verify.mjs",
+    "validate": "npm run typecheck && npm run test && npm run verify",
+    "sync": "node scripts/git-sync.mjs",
+    "sync:draft": "node scripts/git-sync.mjs --draft"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@artinos/studio",
+  "version": "0.12.0",
+  "private": true,
+  "type": "module",
+  "description": "ARTINOS package-native MetaBlock + UI Studio and live System Editor",
+  "dependencies": {
+    "@artinos/ui": "workspace:*",
+    "@artinos/metablock": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}
